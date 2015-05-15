@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Game.Consts;
 
-namespace Assets.Scripts.Engine.Moving {
-    class HorizontalMovingObject : MovingObject {
+namespace Assets.Scripts.Engine.Dragging {
+    class HorizontalDraggingObject : DraggingObject {
         protected override GameConsts.Direction[] Directions {
             get {
                 return new[] { GameConsts.Direction.Left, GameConsts.Direction.Right };

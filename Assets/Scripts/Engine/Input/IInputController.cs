@@ -1,14 +1,11 @@
-﻿using Assets.Scripts.Game.Consts;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Engine.Input {
-    public enum InputEventType {
-        Down,
-        Held
-    }
-
-    public delegate void InputDetectedDelegate(GameConsts.Direction direction, InputEventType eventType);
+    public delegate void InputDetectedDelegate(Vector2 pointerPosition);
 
     public interface IInputController {
-        event InputDetectedDelegate InputDetected;
+        event InputDetectedDelegate PointerDown;
+        event InputDetectedDelegate PointerUp;
+        event InputDetectedDelegate PointerDrag;
     }
 }

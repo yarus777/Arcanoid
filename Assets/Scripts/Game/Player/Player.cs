@@ -1,12 +1,12 @@
-﻿using Assets.Scripts.Engine.Input;
-using Assets.Scripts.Engine.Moving;
+﻿using Assets.Scripts.Engine.Dragging;
+using Assets.Scripts.Engine.Input;
 
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Player {
     public class Player : MonoBehaviour {
         [SerializeField]
-        private MovingObject Movable;
+        private DraggingObject Movable;
 
         public void Init(IInputController inputController) {
             Movable.Init(inputController);

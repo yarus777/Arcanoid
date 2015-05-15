@@ -8,7 +8,7 @@ namespace Assets.Scripts.Game.Player {
         private Player Player;
 
         [SerializeField]
-        private KeyboardInputController KeyboardController;
+        private MouseInputController KeyboardController;
 
         void Start() {
             Player.Init(KeyboardController);
