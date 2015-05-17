@@ -4,7 +4,7 @@ namespace Assets.Scripts.Engine.Dragging {
     class HorizontalDraggingObject : DraggingObject {
         protected override GameConsts.Direction[] Directions {
             get {
-                return new[] { GameConsts.Direction.Left, GameConsts.Direction.Right };
+                return new[] { GameConsts.Direction.Horizontal };
             }
         }
     }

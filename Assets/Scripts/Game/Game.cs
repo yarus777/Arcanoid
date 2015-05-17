@@ -1,11 +1,71 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Engine;
+using Assets.Scripts.Game.Balls;
+using Assets.Scripts.Game.Blocks;
+using Assets.Scripts.Game.Parameters;
+using UnityEngine;
 
 namespace Assets.Scripts.Game {
     class Game : MonoBehaviour {
+        #region Singleton
+
         public static Game Instance { get; private set; }
 
         private void Awake() {
             Instance = this;
+            Init();
+            StartGame();
         }
+
+        #endregion
+
+        #region Editor fields
+
+        [SerializeField]
+        private BlockController BlockController;
+
+        [SerializeField]
+        private BallController BallController;
+
+        [SerializeField]
+        private GameParameters Parameters;
+
+        #endregion
+
+        private readonly ObjectStorage _storage = new ObjectStorage();
+
+        #region Initializing
+
+        private void Init() {
+            InitBalls();
+            InitBlocks();
+        }
+
+        private void InitBalls() {
+            BallController.Init(Parameters.BallSpeed);
+            _storage.Add(BallController);
+        }
+
+        private void InitBlocks() {
+            
+        }
+
+        #endregion
+
+        #region Game state
+
+        private void StartGame() {
+            foreach (var component in _storage.Get<IGameComponent>()) {
+                component.StartGame();
+            }
+        }
+
+        private void FinishGame() {
+            foreach (var component in _storage.Get<IGameComponent>()) {
+                component.FinishGame();
+            }
+        }
+
+        #endregion
+
     }
 }

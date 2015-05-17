@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Engine.Input;
+﻿using System.Linq;
 using Assets.Scripts.Game.Consts;
 
 using UnityEngine;
@@ -7,29 +7,36 @@ namespace Assets.Scripts.Engine.Dragging {
     abstract class DraggingObject : MonoBehaviour {
         protected abstract GameConsts.Direction[] Directions { get; }
 
-        private IInputController _inputController;
+        private RectTransform _transform;
+        private Camera _camera;
 
-        public void Init(IInputController inputController) {
-            _inputController = inputController;
-            _inputController.PointerDown += OnPointerDown;
-            _inputController.PointerUp += OnPointerUp;
-            _inputController.PointerDrag += OnPointerDrag;
+        private void Start() {
+            _transform = transform as RectTransform;
+            _camera = Camera.main;
         }
 
-        #region EVent Handlers
+        private Vector2 _pointerOffset;
 
-        private void OnPointerDrag(Vector2 pointerPosition) {
-            Debug.Log("up");
+        public void OnDown() {
+            var clickPosition = _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+            _pointerOffset = clickPosition - _transform.position;
         }
 
-        private void OnPointerUp(Vector2 pointerPosition) {
-            Debug.Log("up");
+        public void OnDrag() {
+            Vector2 pos = _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+            MoveTo(pos);
         }
 
-        private void OnPointerDown(Vector2 pointerPosition) {
-            Debug.Log("down");
+        private void MoveTo(Vector2 position) {
+            var x = _transform.anchoredPosition.x;
+            var y = _transform.anchoredPosition.y;
+            if (Directions.Any(dir => dir == GameConsts.Direction.Horizontal)) {
+                x = position.x;
+            }
+            if (Directions.Any(dir => dir == GameConsts.Direction.Vertical)) {
+                y = position.y;
+            }
+            _transform.anchoredPosition = new Vector2(x, y);
         }
-
-        #endregion
     }
 }

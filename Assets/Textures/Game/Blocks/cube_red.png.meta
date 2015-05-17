@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: b72aea04ce28c9c4e83c4d37e9e5863b
+guid: c787fdab81a91ee4ea343d2ca5d691d8
 TextureImporter:
   fileIDToRecycleName:
-    21300000: cube_green
+    21300000: cube_red
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +38,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []

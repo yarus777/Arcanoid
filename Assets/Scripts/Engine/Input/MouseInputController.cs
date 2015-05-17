@@ -7,7 +7,7 @@ namespace Assets.Scripts.Engine.Input {
                 OnDown(UnityEngine.Input.mousePosition);
             }
             if (UnityEngine.Input.GetMouseButton(0)) {
-                OnUp(UnityEngine.Input.mousePosition);
+                OnDrag(UnityEngine.Input.mousePosition);
             }
             if (UnityEngine.Input.GetMouseButtonUp(0)) {
                 OnUp(UnityEngine.Input.mousePosition);
