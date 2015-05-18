@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Engine;
 using Assets.Scripts.Game.Balls;
 using Assets.Scripts.Game.Blocks;
+using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Parameters;
 using UnityEngine;
 
@@ -38,6 +39,8 @@ namespace Assets.Scripts.Game {
         private void Init() {
             InitBalls();
             InitBlocks();
+
+            InitComponents();
         }
 
         private void InitBalls() {
@@ -46,12 +49,18 @@ namespace Assets.Scripts.Game {
         }
 
         private void InitBlocks() {
-            
+            _storage.Add(BlockController);
         }
 
         #endregion
 
         #region Game state
+
+        private void InitComponents() {
+            foreach (var component in _storage.Get<IInitializable>()) {
+                component.Init();
+            }
+        }
 
         private void StartGame() {
             foreach (var component in _storage.Get<IGameComponent>()) {

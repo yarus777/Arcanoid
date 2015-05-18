@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Game.GameInterfaces;
+
+using UnityEngine;
 
 namespace Assets.Scripts.Game.Balls {
     class BallController : MonoBehaviour, IGameComponent {

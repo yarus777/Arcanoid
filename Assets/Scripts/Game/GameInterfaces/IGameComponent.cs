@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Game {
+﻿namespace Assets.Scripts.Game.GameInterfaces {
     interface IGameComponent {
         void StartGame();
         void FinishGame();
