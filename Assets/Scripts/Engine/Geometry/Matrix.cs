@@ -13,19 +13,22 @@ namespace Assets.Scripts.Engine.Geometry {
 
         }
 
-        private int _width;
-        private int _height;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
         public Matrix(int x, int y) {
-            _width = x;
-            _height = y;
+            Width = x;
+            Height = y;
         }
 
         public virtual IEnumerable<CellCoords> Get(int count) {
-            int currentCount = 0;
-            for (var i = 0; i < _height; i++) {
-                for (var j = 0; j < _width; j++) {
-
+            var currentCount = 0;
+            for (var i = 0; i < Height; i++) {
+                for (var j = 0; j < Width; j++) {
+                    if (currentCount++ == count) {
+                        yield break;
+                    }
+                    yield return new CellCoords(i, j);
                 }
             }
         }

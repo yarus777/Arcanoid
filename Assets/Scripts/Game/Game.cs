@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Engine;
 using Assets.Scripts.Game.Balls;
 using Assets.Scripts.Game.Blocks;
+using Assets.Scripts.Game.Blocks.Creators;
+using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Parameters;
 using UnityEngine;
@@ -49,6 +51,14 @@ namespace Assets.Scripts.Game {
         }
 
         private void InitBlocks() {
+            BlockCreator blockCreator;
+            if (Parameters.FieldType == GameConsts.FieldType.Random) {
+                blockCreator = new RandomBlockCreator(Parameters.BlockCount, 200, 40, Parameters.BlockXCount, Parameters.BlockYCount);
+            }
+            else {
+                blockCreator = new RestoringBlockCreator();
+            }
+            BlockController.Init(blockCreator);
             _storage.Add(BlockController);
         }
 

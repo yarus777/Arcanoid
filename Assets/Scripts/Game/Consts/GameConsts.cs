@@ -4,5 +4,10 @@
             Horizontal,
             Vertical
         }
+
+        public enum FieldType {
+            Restored,
+            Random
+        }
     }
 }
