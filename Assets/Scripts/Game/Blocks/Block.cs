@@ -7,6 +7,7 @@ namespace Assets.Scripts.Game.Blocks {
         public void Init(BlockInfo blockInfo) {
             var rectTransform = transform as RectTransform;
             rectTransform.anchoredPosition = new Vector2(blockInfo.XPos * blockInfo.Width, blockInfo.YPos * blockInfo.Height);
+            rectTransform.localScale = new Vector3(1, 1, 1);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
