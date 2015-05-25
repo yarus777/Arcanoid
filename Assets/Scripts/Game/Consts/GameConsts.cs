@@ -9,5 +9,10 @@
             Restored,
             Random
         }
+
+        public enum StatisticItems {
+            Lives,
+            Score
+        }
     }
 }
