@@ -5,6 +5,9 @@ using Assets.Scripts.Game.Blocks.Creators;
 using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Parameters;
+using Assets.Scripts.Game.State;
+using Assets.Scripts.Game.State.FailReasons;
+
 using UnityEngine;
 
 namespace Assets.Scripts.Game {
@@ -17,6 +20,12 @@ namespace Assets.Scripts.Game {
             Instance = this;
             Init();
             StartGame();
+        }
+
+        private void OnDestroy() {
+            foreach (var obj in _storage.Get<IUninitialize>()) {
+                obj.DeInit();
+            }
         }
 
         #endregion
@@ -43,6 +52,7 @@ namespace Assets.Scripts.Game {
             InitBlocks();
 
             InitComponents();
+            InitStateController();
         }
 
         private void InitBalls() {
@@ -60,6 +70,12 @@ namespace Assets.Scripts.Game {
             }
             BlockController.Init(blockCreator);
             _storage.Add(BlockController);
+        }
+
+        private void InitStateController() {
+            var controller = new StateController();
+            controller.RegisterFailReason(FindObjectOfType<LoseBallBorder>());
+            _storage.Add(controller);
         }
 
         #endregion

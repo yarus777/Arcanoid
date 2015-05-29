@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.Game.State {
+namespace Assets.Scripts.Game.State.FailReasons {
     class LoseBallBorder : MonoBehaviour, IFailReason {
         #region Events
 
@@ -13,7 +13,6 @@ namespace Assets.Scripts.Game.State {
             if (handler != null) {
                 handler();
             }
-            Debug.Log("YOU ARE LOSE");
             Time.timeScale = 0;
         }
 

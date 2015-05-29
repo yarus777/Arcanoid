@@ -5,11 +5,11 @@ namespace Assets.Scripts {
     class Arcanoid {
         #region Singleton
 
-        private static Arcanoid _instance;
+        private static Arcanoid instance;
 
         public static Arcanoid Instance {
             get {
-                return _instance ?? new Arcanoid();
+                return instance ?? (instance = new Arcanoid());
             }
         }
 
@@ -18,7 +18,7 @@ namespace Assets.Scripts {
         public void Init() {
         }
 
-        public Arcanoid() {
+        private Arcanoid() {
             Initialize();
         }
 

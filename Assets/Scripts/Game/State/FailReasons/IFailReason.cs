@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Game.State {
+﻿namespace Assets.Scripts.Game.State.FailReasons {
     public delegate void FailReasonDelegate();
 
     interface IFailReason {
