@@ -13,6 +13,10 @@ namespace Assets.Scripts.Game.Parameters {
             _items = new List<IStatisticHandler>();
         }
 
+        public IStatisticHandler Get(GameConsts.StatisticItems type) {
+            return _items.FirstOrDefault(item => item.Type == type);
+        }
+
         public bool RegisterItem(IStatisticHandler item) {
             if (_items.Any(it => it.Type == item.Type)) {
                 return false;
