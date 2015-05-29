@@ -3,11 +3,22 @@ using Assets.Scripts.Game.Blocks.Data;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Blocks {
+    [RequireComponent(typeof(BoxCollider2D))]
     class Block : MonoBehaviour, IStrikedObject {
+        private BoxCollider2D _collider;
+
+        private BoxCollider2D Collider {
+            get {
+                return _collider ?? (_collider = GetComponent<BoxCollider2D>());
+            }
+        }
+
         public void Init(BlockInfo blockInfo) {
             var rectTransform = transform as RectTransform;
             rectTransform.anchoredPosition = new Vector2(blockInfo.XPos * blockInfo.Width, blockInfo.YPos * blockInfo.Height);
             rectTransform.localScale = new Vector3(1, 1, 1);
+            rectTransform.sizeDelta = new Vector2(blockInfo.Width, blockInfo.Height);
+            Collider.size = new Vector2(blockInfo.Width, blockInfo.Height);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {

@@ -53,7 +53,7 @@ namespace Assets.Scripts.Game {
         private void InitBlocks() {
             BlockCreator blockCreator;
             if (Parameters.FieldType == GameConsts.FieldType.Random) {
-                blockCreator = new RandomBlockCreator(Parameters.BlockCount, 200, 40, Parameters.BlockXCount, Parameters.BlockYCount);
+                blockCreator = new RandomBlockCreator(Parameters.BlockCount, Parameters.BlockSize.x, Parameters.BlockSize.y, Parameters.GridSizeX, Parameters.GridSizeY);
             }
             else {
                 blockCreator = new RestoringBlockCreator();

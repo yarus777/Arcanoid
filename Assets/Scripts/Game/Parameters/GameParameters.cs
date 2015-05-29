@@ -8,7 +8,8 @@ namespace Assets.Scripts.Game.Parameters {
         public Vector2 BallSpeed;
         public GameConsts.FieldType FieldType;
         public int BlockCount;
-        public int BlockXCount;
-        public int BlockYCount;
+        public int GridSizeX;
+        public int GridSizeY;
+        public Vector2 BlockSize;
     }
 }

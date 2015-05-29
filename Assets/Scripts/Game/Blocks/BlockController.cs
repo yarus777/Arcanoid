@@ -2,16 +2,21 @@
 using Assets.Scripts.Game.Blocks.Creators;
 using Assets.Scripts.Game.GameInterfaces;
 using System.Collections.Generic;
+
+using Assets.Scripts.Engine.Extensions;
+
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Blocks {
     class BlockController : MonoBehaviour, IGameComponent {
+        [SerializeField]
+        private Block[] BlocksPrefabs;
+
         private List<Block> _blocks = new List<Block>();
 
         public void Init(BlockCreator creator) {
-            //foreach (var block in GetComponentsInChildren<Block>()) {
             foreach(var blockInfo in creator.BlocksInfo) {
-                var blockObj = Instantiate(Resources.Load("Block")) as GameObject;
+                var blockObj = Instantiate(BlocksPrefabs.Random().gameObject) as GameObject;
                 blockObj.transform.SetParent(transform);
                 var block = blockObj.GetComponent<Block>();
                 block.Init(blockInfo);
