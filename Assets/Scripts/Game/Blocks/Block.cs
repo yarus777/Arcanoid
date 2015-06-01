@@ -19,6 +19,7 @@ namespace Assets.Scripts.Game.Blocks {
             rectTransform.localScale = new Vector3(1, 1, 1);
             rectTransform.sizeDelta = new Vector2(blockInfo.Width, blockInfo.Height);
             Collider.size = new Vector2(blockInfo.Width, blockInfo.Height);
+            name = string.Format("{0}[{1}][{2}]", name, blockInfo.XPos, blockInfo.YPos);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {

@@ -16,6 +16,10 @@ namespace Assets.Scripts.Engine.Geometry {
         public int Width { get; private set; }
         public int Height { get; private set; }
 
+        protected int _xBegin = 0;
+
+        protected int _yBegin = 0;
+
         public Matrix(int x, int y) {
             Width = x;
             Height = y;
@@ -23,14 +27,20 @@ namespace Assets.Scripts.Engine.Geometry {
 
         public virtual IEnumerable<CellCoords> Get(int count) {
             var currentCount = 0;
-            for (var i = 0; i < Height; i++) {
-                for (var j = 0; j < Width; j++) {
+            for (var i = _xBegin; i < _xBegin + Height; i++) {
+                for (var j = _yBegin; j < _yBegin + Width; j++) {
                     if (currentCount++ == count) {
                         yield break;
                     }
                     yield return new CellCoords(i, j);
                 }
             }
+        }
+
+        public Matrix Normalize() {
+            _xBegin = -Width / 2;
+            _yBegin = -Height / 2;
+            return this;
         }
     }
 }
