@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Assets.Scripts.Engine.State;
+using Assets.Scripts.Engine.State.Serializers;
 using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.Parameters.Handlers;
+using Assets.Scripts.Serialization.Statistics;
 
 namespace Assets.Scripts.Game.Parameters {
-    class Statistics {
-        private readonly List<IStatisticHandler> _items;
+    class Statistics : ISaveState {
+        private const string KEY = "statistics";
+        private List<IStatisticHandler> _items;
 
         public Statistics() {
             _items = new List<IStatisticHandler>();
@@ -25,12 +29,26 @@ namespace Assets.Scripts.Game.Parameters {
             return true;
         }
 
-        public int GetValue(GameConsts.StatisticItems type) {
-            var handler = _items.FirstOrDefault(x => x.Type == type);
-            if (handler == null) {
-                throw new ArgumentException("Unknown handler type");
-            }
-            return handler.Count;
+        #region ISaveState
+
+        public void Load(IStateSerializer stateSerializer) {
+            _items = stateSerializer.Deserialize<List<IStatisticHandler>>(KEY);
         }
+
+        public void Save(IStateSerializer stateSerializer) {
+            //var saved = _items.Select(item => new SavedStatistics { Type = item.Type, Count = item.Count });
+            stateSerializer.Serialize(KEY, _items);
+        }
+
+        public event StateChangedDelegate StateChanged;
+
+        private void OnStateChanged() {
+            var handler = StateChanged;
+            if (handler != null) {
+                handler.Invoke(this);
+            }
+        }
+
+        #endregion
     }
 }
