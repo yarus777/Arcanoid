@@ -13,7 +13,11 @@ namespace Assets.Scripts.Engine.Geometry {
         public override IEnumerable<CellCoords> Get(int count) {
             var list = new List<CellCoords>();
             while (list.Count < count) {
-                list.Add(GetRandom(list));
+                var elem = GetRandom(list);
+                if (elem == null) {
+                    throw new ArgumentOutOfRangeException("count");
+                }
+                list.Add(elem);
             }
             return list;
         }
@@ -31,7 +35,7 @@ namespace Assets.Scripts.Engine.Geometry {
                     index--;
                 }
             }
-            throw new ArgumentOutOfRangeException("count");
+            return null;
         }
     }
 }
