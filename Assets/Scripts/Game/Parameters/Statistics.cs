@@ -6,15 +6,16 @@ using Assets.Scripts.Engine.State;
 using Assets.Scripts.Engine.State.Serializers;
 using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.Parameters.Handlers;
-using Assets.Scripts.Serialization.Statistics;
 
 namespace Assets.Scripts.Game.Parameters {
-    class Statistics : ISaveState {
-        private const string KEY = "statistics";
-        private List<IStatisticHandler> _items;
+    class Statistics : ILoadState {
+        private readonly List<IStatisticHandler> _items;
 
-        public Statistics() {
+        private readonly IStateSerializer _stateSerializer;
+
+        public Statistics(IStateSerializer stateSerializer) {
             _items = new List<IStatisticHandler>();
+            _stateSerializer = stateSerializer;
         }
 
         public IStatisticHandler Get(GameConsts.StatisticItems type) {
@@ -25,27 +26,20 @@ namespace Assets.Scripts.Game.Parameters {
             if (_items.Any(it => it.Type == item.Type)) {
                 return false;
             }
+            item.StateChanged += OnItemStateChanged;
             _items.Add(item);
             return true;
         }
 
-        #region ISaveState
+        private void OnItemStateChanged(ISaveLoadState saveState) {
+            saveState.Save(_stateSerializer);
+        }
+
+        #region ILoadState
 
         public void Load(IStateSerializer stateSerializer) {
-            _items = stateSerializer.Deserialize<List<IStatisticHandler>>(KEY);
-        }
-
-        public void Save(IStateSerializer stateSerializer) {
-            //var saved = _items.Select(item => new SavedStatistics { Type = item.Type, Count = item.Count });
-            stateSerializer.Serialize(KEY, _items);
-        }
-
-        public event StateChangedDelegate StateChanged;
-
-        private void OnStateChanged() {
-            var handler = StateChanged;
-            if (handler != null) {
-                handler.Invoke(this);
+            foreach (var item in _items) {
+                item.Load(_stateSerializer);
             }
         }
 

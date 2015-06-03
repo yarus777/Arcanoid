@@ -43,7 +43,7 @@ namespace Assets.Scripts {
         }
 
         private void InitStatistics() {
-            Statistics = new Statistics();
+            Statistics = new Statistics(Tools.StateSerializer);
             Statistics.RegisterItem(new LivesHandler());
             Statistics.RegisterItem(new ScoreHandler());
 
@@ -53,24 +53,24 @@ namespace Assets.Scripts {
         #region Save State
 
         public void InitStateChangable() {
-            foreach (var item in _storage.Get<ISaveState>()) {
+            foreach (var item in _storage.Get<ISaveLoadState>()) {
                 item.StateChanged += Save;
             }
         }
 
         public void Load(IStateSerializer stateSerializer) {
-            foreach (var item in _storage.Get<ISaveState>()) {
+            foreach (var item in _storage.Get<ISaveLoadState>()) {
                 item.Load(stateSerializer);
             }
         }
 
         public void Save(IStateSerializer stateSerializer) {
-            foreach (var item in _storage.Get<ISaveState>()) {
+            foreach (var item in _storage.Get<ISaveLoadState>()) {
                 item.Save(stateSerializer);
             }
         }
 
-        private void Save(ISaveState item) {
+        private void Save(ISaveLoadState item) {
             item.Save(Tools.StateSerializer);
         }
 
