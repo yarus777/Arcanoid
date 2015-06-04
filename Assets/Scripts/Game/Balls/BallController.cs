@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Game.GameInterfaces;
+using Assets.Scripts.Game.Levels;
 
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Assets.Scripts.Game.Balls {
             _ballSpeed = ballSpeed;
         }
 
-        public void StartGame() {
+        public void StartGame(Level level) {
             Ball.Send(_ballSpeed);
         }
 

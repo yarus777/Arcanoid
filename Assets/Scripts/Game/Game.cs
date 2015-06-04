@@ -7,6 +7,8 @@ using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Parameters;
 using Assets.Scripts.Game.State;
 using Assets.Scripts.Game.State.FailReasons;
+using Assets.Scripts.UI.GameScene;
+using Assets.Scripts.UI.Popups.Implementations;
 
 using UnityEngine;
 
@@ -41,9 +43,28 @@ namespace Assets.Scripts.Game {
         [SerializeField]
         private GameParameters Parameters;
 
+        [SerializeField]
+        private GameUIController UIController;
+
         #endregion
 
         private readonly ObjectStorage _storage = new ObjectStorage();
+
+        #region Public properties
+
+        public StateController StateController {
+            get {
+                return _storage.GetFirst<StateController>();
+            }
+        }
+
+        public GameUIController UI {
+            get {
+                return UIController;
+            }
+        }
+
+        #endregion
 
         #region Initializing
 
@@ -73,9 +94,7 @@ namespace Assets.Scripts.Game {
         }
 
         private void InitStateController() {
-            var controller = new StateController();
-            controller.RegisterFailReason(FindObjectOfType<LoseBallBorder>());
-            _storage.Add(controller);
+            _storage.Add(Arcanoid.Instance.StateController);
         }
 
         #endregion
@@ -89,8 +108,9 @@ namespace Assets.Scripts.Game {
         }
 
         private void StartGame() {
+            UI.Popups.ShowPopup<LosePopup>();
             foreach (var component in _storage.Get<IGameComponent>()) {
-                component.StartGame();
+                component.StartGame(Arcanoid.Instance.LevelStorage[0]);
             }
         }
 

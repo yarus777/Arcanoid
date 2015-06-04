@@ -12,6 +12,10 @@ namespace Assets.Scripts.Engine {
 
         public IEnumerable<T> Get<T>() {
             return _objects.OfType<T>();
-        } 
+        }
+
+        public T GetFirst<T>() {
+            return _objects.OfType<T>().FirstOrDefault();
+        }
     }
 }

@@ -3,8 +3,10 @@ using Assets.Scripts.Engine.State;
 using Assets.Scripts.Engine.State.Serializers;
 using Assets.Scripts.Engine.State.StateSavers;
 using Assets.Scripts.Engine.Subscription;
+using Assets.Scripts.Game.Levels;
 using Assets.Scripts.Game.Parameters;
 using Assets.Scripts.Game.Parameters.Handlers;
+using Assets.Scripts.Game.State;
 using Assets.Scripts.Parameters;
 using Assets.Scripts.Serialization.Parameters;
 
@@ -27,14 +29,18 @@ namespace Assets.Scripts {
         #region Game items
 
         public Statistics Statistics { get; private set; }
+        public StateController StateController{ get; private set; }
         public DefaultParameters DefaultParameters { get; private set; }
+        public LevelStorage LevelStorage { get; private set; }
 
         #endregion
         
 
         private void Initialize() {
             InitDefaults();
+            InitStateController();
             InitStatistics();
+            InitLevelStorage();
         }
 
         private void Uninitialize() {
@@ -53,6 +59,15 @@ namespace Assets.Scripts {
 
         private void InitDefaults() {
             DefaultParameters = DefaultParameters.Load(new XmlSerializer(new ResourceStateSaver()));
+        }
+
+        private void InitLevelStorage() {
+            LevelStorage = new LevelStorage();
+        }
+
+        private void InitStateController() {
+            StateController = new StateController();
+            _storage.Add(StateController);
         }
 
         #region Save State

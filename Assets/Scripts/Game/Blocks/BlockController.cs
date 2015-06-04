@@ -4,6 +4,7 @@ using Assets.Scripts.Game.GameInterfaces;
 using System.Collections.Generic;
 
 using Assets.Scripts.Engine.Extensions;
+using Assets.Scripts.Game.Levels;
 
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace Assets.Scripts.Game.Blocks {
             }
         }
         
-        public void StartGame() {
+        public void StartGame(Level level) {
             
         }
 
