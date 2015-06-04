@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Assets.Scripts.Engine;
 using Assets.Scripts.Engine.State;
 using Assets.Scripts.Engine.State.Serializers;
 using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.Parameters.Handlers;
 
 namespace Assets.Scripts.Game.Parameters {
-    class Statistics : ILoadState {
+    class Statistics : ILoadState, IUninitialize {
         private readonly List<IStatisticHandler> _items;
 
         private readonly IStateSerializer _stateSerializer;
@@ -44,5 +45,11 @@ namespace Assets.Scripts.Game.Parameters {
         }
 
         #endregion
+
+        public void DeInit() {
+            foreach (var item in _items) {
+                item.StateChanged -= OnItemStateChanged;
+            }
+        }
     }
 }

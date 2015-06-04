@@ -1,24 +1,36 @@
 ﻿using System.IO;
 
+using Assets.Scripts.Engine.Exceptions;
+using Assets.Scripts.Engine.State.StateSavers;
+
 namespace Assets.Scripts.Engine.State.Serializers {
-    abstract class XmlSerializer : IStateSerializer {
-        public void Serialize(string key, object obj) {
+    public class XmlSerializer : AbstractSerializer {
+        public XmlSerializer(IStateSaver stateSaver)
+            : base(stateSaver) {
+        }
+
+        public override void Serialize(string key, object obj) {
             var serializer = new System.Xml.Serialization.XmlSerializer(obj.GetType());
             using (var writer = new StringWriter()) {
                 serializer.Serialize(writer, obj);
-            }
-            Save(serializer.ToString(), key);
-        }
-
-        public T Deserialize<T>(string key) {
-            var serializedObj = Load(key);
-            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
-            using (var reader = new StringReader(serializedObj)) {
-                return (T)serializer.Deserialize(reader);
+                StateSaver.Save(writer.ToString(), key);
             }
         }
 
-        protected abstract void Save(string serializedObject, string key);
-        protected abstract string Load(string key);
+        public override T Deserialize<T>(string key) {
+            try {
+                var serializedObj = StateSaver.Load(key);
+                if (string.IsNullOrEmpty(serializedObj)) {
+                    throw new NotSavedException(key);
+                }
+                var serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
+                using (var reader = new StringReader(serializedObj)) {
+                    return (T)serializer.Deserialize(reader);
+                }
+            }
+            catch (IOException e) {
+                throw new NotSavedException(key);
+            }
+        }
     }
 }

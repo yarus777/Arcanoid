@@ -1,45 +1,46 @@
 ﻿using Assets.Scripts.Engine;
 using Assets.Scripts.Engine.State;
 using Assets.Scripts.Engine.State.Serializers;
+using Assets.Scripts.Engine.State.StateSavers;
 using Assets.Scripts.Engine.Subscription;
 using Assets.Scripts.Game.Parameters;
 using Assets.Scripts.Game.Parameters.Handlers;
 using Assets.Scripts.Parameters;
+using Assets.Scripts.Serialization.Parameters;
 
 namespace Assets.Scripts {
-    class Arcanoid {
-        #region Singleton
-
-        private static Arcanoid instance;
-
-        public static Arcanoid Instance {
-            get {
-                return instance ?? (instance = new Arcanoid());
-            }
-        }
-
-        #endregion
-
+    class Arcanoid : UnitySingleton<Arcanoid> {
         private readonly ObjectStorage _storage = new ObjectStorage();
 
-        public void Init() {
-        }
-
-        private Arcanoid() {
+        protected override void LateAwake() {
             Initialize();
             InitStateChangable();
             Load(Tools.StateSerializer);
+            Subscribe();
+        }
+
+        private void OnDestroy() {
+            Unsubscribe();
+            Uninitialize();
         }
 
         #region Game items
 
         public Statistics Statistics { get; private set; }
+        public DefaultParameters DefaultParameters { get; private set; }
 
         #endregion
         
 
         private void Initialize() {
+            InitDefaults();
             InitStatistics();
+        }
+
+        private void Uninitialize() {
+            foreach (var item in _storage.Get<IUninitialize>()) {
+                item.DeInit();
+            }
         }
 
         private void InitStatistics() {
@@ -48,6 +49,10 @@ namespace Assets.Scripts {
             Statistics.RegisterItem(new ScoreHandler());
 
             _storage.Add(Statistics);
+        }
+
+        private void InitDefaults() {
+            DefaultParameters = DefaultParameters.Load(new XmlSerializer(new ResourceStateSaver()));
         }
 
         #region Save State
@@ -59,7 +64,7 @@ namespace Assets.Scripts {
         }
 
         public void Load(IStateSerializer stateSerializer) {
-            foreach (var item in _storage.Get<ISaveLoadState>()) {
+            foreach (var item in _storage.Get<ILoadState>()) {
                 item.Load(stateSerializer);
             }
         }

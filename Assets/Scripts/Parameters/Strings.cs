@@ -1,5 +1,6 @@
 ﻿namespace Assets.Scripts.Parameters {
-    class Strings {
+    public class Strings {
         public const string LEVELS_PATH = "Levels";
+        public const string PARAMETERS_PATH = "Parameters/parameters";
     }
 }

@@ -3,10 +3,9 @@
 namespace Assets.Editor.LevelEditor {
     partial class LevelEditor {
         private bool _loaded;
-        private void OnGUI() {
-            if (!_loaded) {
-                Load();
-            }
+
+        protected override void OnGUI() {
+            base.OnGUI();
             DrawField();
             GUILayout.BeginHorizontal();
             {
