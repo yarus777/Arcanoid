@@ -11,9 +11,8 @@ namespace Assets.Scripts.Game.State.FailReasons {
         private void OnFail() {
             var handler = Failed;
             if (handler != null) {
-                handler();
+                handler(this);
             }
-            Time.timeScale = 0;
         }
 
         #endregion

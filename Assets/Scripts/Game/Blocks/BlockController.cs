@@ -13,7 +13,7 @@ namespace Assets.Scripts.Game.Blocks {
         [SerializeField]
         private Block[] BlocksPrefabs;
 
-        private List<Block> _blocks = new List<Block>();
+        private readonly List<AbstractBlock> _blocks = new List<AbstractBlock>();
 
         public void Init(BlockCreator creator) {
             foreach(var blockInfo in creator.BlocksInfo) {
@@ -33,10 +33,25 @@ namespace Assets.Scripts.Game.Blocks {
         public void FinishGame() {
         }
 
-        private void OnBlockStriked(IStrikedObject striked, IStriker striker) {
-            //todo не использовать напрямую block, использовать интерфейс
-            Destroy(((Block)striked).gameObject);
+        private void OnBlockStriked(AbstractBlock block, IStriker striker) {
+            _blocks.Remove(block);
+            Destroy(block.gameObject);
+            OnBlockCountChanged();
         }
+
+        #region Events
+
+        public delegate void BlockCountChangedDelegate(int blocksLeft);
+        public event BlockCountChangedDelegate BlockCountChanged;
+
+        private void OnBlockCountChanged() {
+            var handler = BlockCountChanged;
+            if (handler != null) {
+                handler.Invoke(_blocks.Count);
+            }
+        }
+
+        #endregion
 
     }
 }

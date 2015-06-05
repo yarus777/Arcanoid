@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using Assets.Scripts.Engine;
 using Assets.Scripts.Game.GameInterfaces;
@@ -17,8 +18,8 @@ namespace Assets.Scripts.Game.State {
     }
 
     class StateController : IUninitialize, IGameComponent {
-        private IEnumerable<IFailReason> _failReasons;
-        private IEnumerable<IWinReason> _winReasons;
+        private IList<IFailReason> _failReasons;
+        private IList<IWinReason> _winReasons;
 
         private GameState _state;
         public GameState GameState {
@@ -26,6 +27,9 @@ namespace Assets.Scripts.Game.State {
                 return _state;
             }
             private set {
+                if (_state == value) {
+                    return;
+                }
                 _state = value;
                 OnStateChanged(_state);
             }
@@ -35,6 +39,9 @@ namespace Assets.Scripts.Game.State {
         public event StateChangedDelegate StateChanged;
 
         private void OnStateChanged(GameState state) {
+            if (state == GameState.Win || state == GameState.Lose) {
+                OnLevelEnd();
+            }
             var handler = StateChanged;
             if (handler != null) {
                 handler.Invoke(state);
@@ -43,14 +50,18 @@ namespace Assets.Scripts.Game.State {
 
         #region Event handlers
 
-        private void OnFail() {
+        private void OnFail(IFailReason reason) {
             Console.LogInfo("You are lose");
+            _failReasons.Remove(reason);
             GameState = GameState.Lose;
         }
 
-        private void OnWin() {
-            Console.LogInfo("You are win");
-            GameState = GameState.Win;
+        private void OnWin(IWinReason reason) {
+            _winReasons.Remove(reason);
+            if (_winReasons.Count == 0) {
+                Console.LogInfo("You are win");
+                GameState = GameState.Win;
+            }
         }
 
         #endregion
@@ -58,14 +69,15 @@ namespace Assets.Scripts.Game.State {
         #region Game components
 
         public void StartGame(Level level) {
-            _failReasons = level.FailReasons;
-            _winReasons = level.WinReasons;
+            _failReasons = level.FailReasons.ToList();
+            _winReasons = level.WinReasons.ToList();
 
             foreach (var reason in _failReasons) {
                 reason.Failed += OnFail;
             }
             foreach (var reason in _winReasons) {
                 reason.Win += OnWin;
+                reason.Subscribe();
             }
             GameState = GameState.Run;
         }
@@ -83,5 +95,11 @@ namespace Assets.Scripts.Game.State {
         }
 
         #endregion
+
+        private void OnLevelEnd() {
+            foreach (var reason in _winReasons) {
+                reason.Unsubscribe();
+            }
+        }
     }
 }

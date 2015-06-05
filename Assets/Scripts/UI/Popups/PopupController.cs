@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using Assets.Scripts.Game.State;
 using Assets.Scripts.UI.Popups.Animations;
+using Assets.Scripts.UI.Popups.Implementations;
 
 using UnityEngine;
 
@@ -13,7 +15,30 @@ namespace Assets.Scripts.UI.Popups {
         private readonly Stack<Popup> _popups = new Stack<Popup>();
         private IPopupAnimation _animator = new ScalingPopupAnimation();
 
-        public void ShowPopup<T>() where T: Popup{
+        private void Start() {
+            Game.Game.Instance.State.StateChanged += OnStateChanged;
+        }
+
+        private void OnDestroy() {
+            Game.Game.Instance.State.StateChanged -= OnStateChanged;
+        }
+
+        #region Event handlers
+
+        private void OnStateChanged(GameState state) {
+            switch (state) {
+                case GameState.Win:
+                    ShowPopup<WinPopup>();
+                    break;
+                case GameState.Lose:
+                    ShowPopup<LosePopup>();
+                    break;
+            }
+        }
+
+        #endregion
+
+        public void ShowPopup<T>() where T : Popup {
             var popup = PopupsPrefabs.OfType<T>().FirstOrDefault();
             if (popup != null) {
                 var newObj = Instantiate(popup.gameObject) as GameObject;

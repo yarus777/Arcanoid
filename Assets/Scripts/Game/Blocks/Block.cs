@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Game.Blocks {
     [RequireComponent(typeof(BoxCollider2D))]
-    class Block : MonoBehaviour, IStrikedObject {
+    class Block : AbstractBlock {
         private BoxCollider2D _collider;
 
         private BoxCollider2D Collider {
@@ -32,7 +32,7 @@ namespace Assets.Scripts.Game.Blocks {
 
         #region Events
 
-        public event StrikedDelegate Striked;
+        public override event BlockStrikedDelegate Striked;
 
         private void OnStriked(IStriker striker) {
             var handler = Striked;

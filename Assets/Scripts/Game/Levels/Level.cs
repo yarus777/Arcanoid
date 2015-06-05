@@ -5,14 +5,14 @@ using Assets.Scripts.Game.State.WinReasons;
 
 namespace Assets.Scripts.Game.Levels {
     class Level {
-        private List<IFailReason> _failReasons;
+        private readonly List<IFailReason> _failReasons;
         public IEnumerable<IFailReason> FailReasons {
             get {
                 return _failReasons;
             }
         }
 
-        private List<IWinReason> _winReasons;
+        private readonly List<IWinReason> _winReasons;
 
         public IEnumerable<IWinReason> WinReasons {
             get {
@@ -23,6 +23,7 @@ namespace Assets.Scripts.Game.Levels {
         public Level() {
             _failReasons = new List<IFailReason>();
             _winReasons = new List<IWinReason>();
+            _winReasons.Add(new FieldClearedReason());
         }
     }
 }

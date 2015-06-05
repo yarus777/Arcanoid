@@ -52,9 +52,15 @@ namespace Assets.Scripts.Game {
 
         #region Public properties
 
-        public StateController StateController {
+        public StateController State {
             get {
                 return _storage.GetFirst<StateController>();
+            }
+        }
+
+        public BlockController Blocks {
+            get {
+                return _storage.GetFirst<BlockController>();
             }
         }
 
@@ -108,7 +114,6 @@ namespace Assets.Scripts.Game {
         }
 
         private void StartGame() {
-            UI.Popups.ShowPopup<LosePopup>();
             foreach (var component in _storage.Get<IGameComponent>()) {
                 component.StartGame(Arcanoid.Instance.LevelStorage[0]);
             }

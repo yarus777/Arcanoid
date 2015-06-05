@@ -1,5 +1,5 @@
 ﻿namespace Assets.Scripts.Engine.Subscription {
-    interface ISubscribable {
+    public interface ISubscribable {
         void Subscribe();
 
         void Unsubscribe();
