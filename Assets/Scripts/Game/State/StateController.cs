@@ -74,6 +74,7 @@ namespace Assets.Scripts.Game.State {
 
             foreach (var reason in _failReasons) {
                 reason.Failed += OnFail;
+                reason.Subscribe();
             }
             foreach (var reason in _winReasons) {
                 reason.Win += OnWin;
@@ -98,6 +99,9 @@ namespace Assets.Scripts.Game.State {
 
         private void OnLevelEnd() {
             foreach (var reason in _winReasons) {
+                reason.Unsubscribe();
+            }
+            foreach (var reason in _failReasons) {
                 reason.Unsubscribe();
             }
         }

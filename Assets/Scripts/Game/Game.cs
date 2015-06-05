@@ -2,6 +2,7 @@
 using Assets.Scripts.Game.Balls;
 using Assets.Scripts.Game.Blocks;
 using Assets.Scripts.Game.Blocks.Creators;
+using Assets.Scripts.Game.Bounds;
 using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Parameters;
@@ -41,6 +42,9 @@ namespace Assets.Scripts.Game {
         private BallController BallController;
 
         [SerializeField]
+        private Ground BottomBorder;
+
+        [SerializeField]
         private GameParameters Parameters;
 
         [SerializeField]
@@ -70,6 +74,12 @@ namespace Assets.Scripts.Game {
             }
         }
 
+        public Ground Ground {
+            get {
+                return _storage.GetFirst<Ground>();
+            }
+        }
+
         #endregion
 
         #region Initializing
@@ -80,6 +90,7 @@ namespace Assets.Scripts.Game {
 
             InitComponents();
             InitStateController();
+            InitBounds();
         }
 
         private void InitBalls() {
@@ -101,6 +112,10 @@ namespace Assets.Scripts.Game {
 
         private void InitStateController() {
             _storage.Add(Arcanoid.Instance.StateController);
+        }
+
+        private void InitBounds() {
+            _storage.Add(BottomBorder);
         }
 
         #endregion

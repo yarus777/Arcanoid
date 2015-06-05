@@ -23,6 +23,8 @@ namespace Assets.Scripts.Game.Levels {
         public Level() {
             _failReasons = new List<IFailReason>();
             _winReasons = new List<IWinReason>();
+
+            _failReasons.Add(new BallLostReason());
             _winReasons.Add(new FieldClearedReason());
         }
     }

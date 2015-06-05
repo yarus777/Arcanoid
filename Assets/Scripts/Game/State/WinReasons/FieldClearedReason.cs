@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Engine.Subscription;
 
 namespace Assets.Scripts.Game.State.WinReasons {
-    class FieldClearedReason : IWinReason, ISubscribable {
+    class FieldClearedReason : IWinReason {
 
         #region Events
 
