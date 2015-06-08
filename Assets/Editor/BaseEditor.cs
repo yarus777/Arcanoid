@@ -1,9 +1,12 @@
 ﻿using Assets.Scripts.Engine.State.Serializers;
-
+using System.IO;
 using UnityEditor;
+using UnityEngine;
 
 namespace Assets.Editor {
     abstract class BaseEditor : EditorWindow {
+        public static readonly string ROOT_PATH = Path.Combine(Application.dataPath, "Resources");
+
         protected abstract void Load();
         protected abstract void Save();
 
@@ -12,8 +15,8 @@ namespace Assets.Editor {
         private bool _loaded = false;
         protected virtual void OnGUI() {
             if (!_loaded) {
-                Load();
                 _loaded = true;
+                Load();
             }
         }
 

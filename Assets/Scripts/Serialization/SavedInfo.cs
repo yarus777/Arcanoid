@@ -1,4 +1,4 @@
 ﻿namespace Assets.Scripts.Serialization {
-    abstract class SavedInfo {
+    public abstract class SavedInfo {
     }
 }

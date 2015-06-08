@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Engine.State.Serializers {
     public abstract class AbstractSerializer : IStateSerializer {
-        protected IStateSaver StateSaver { get; private set; }
+        public IStateSaver StateSaver { get; private set; }
 
         protected AbstractSerializer(IStateSaver stateSaver) {
             StateSaver = stateSaver;

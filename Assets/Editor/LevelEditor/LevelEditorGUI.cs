@@ -2,8 +2,6 @@
 
 namespace Assets.Editor.LevelEditor {
     partial class LevelEditor {
-        private bool _loaded;
-
         protected override void OnGUI() {
             base.OnGUI();
             DrawField();
@@ -11,13 +9,19 @@ namespace Assets.Editor.LevelEditor {
             {
                 GUILayout.BeginVertical(GUILayout.Width(Consts.FIELD_WIDTH));
                 {
-                    GUILayout.Space(Consts.FIELD_HEIGHT);
+                    //GUILayout.Space(Consts.FIELD_HEIGHT);
+                    GUILayout.BeginVertical(GUILayout.Height(Consts.FIELD_HEIGHT), GUILayout.ExpandHeight(true));
+                    {
+                        _field.Draw();
+                    }
+                    GUILayout.EndVertical();
                     DrawSaveLoadPanel();
                 }
                 GUILayout.EndVertical();
                 DrawProperties();
             }
             GUILayout.EndHorizontal();
+            Repaint();
         }
 
         private void DrawField() {
@@ -29,19 +33,15 @@ namespace Assets.Editor.LevelEditor {
                 
             }
             if (GUILayout.Button("Open")) {
-
+                LoadLevel();
             }
             if (GUILayout.Button("Save")) {
-
+                Save();
             }
         }
 
         private void DrawProperties() {
-            DrawBlocks();
-        }
-
-        private void DrawBlocks() {
-            
+            _tabs.Draw();
         }
     }
 }
