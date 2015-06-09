@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.Game.Consts {
+﻿using UnityEngine;
+
+namespace Assets.Scripts.Game.Consts {
     public class GameConsts {
         public enum Direction {
             Horizontal,
@@ -14,5 +16,7 @@
             Lives,
             Score
         }
+
+        public static readonly Vector2 BLOCK_SIZE = new Vector2(120, 70);
     }
 }
