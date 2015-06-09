@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Number>0</Number>
-  <Blocks />
+  <Blocks>
+    <Block>
+      <Type>Stone</Type>
+      <Position>
+        <x>120</x>
+        <y>0</y>
+      </Position>
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <Position>
+        <x>240</x>
+        <y>0</y>
+      </Position>
+    </Block>
+    <Block>
+      <Type>Metal</Type>
+      <Position>
+        <x>0</x>
+        <y>0</y>
+      </Position>
+    </Block>
+  </Blocks>
 </Level>

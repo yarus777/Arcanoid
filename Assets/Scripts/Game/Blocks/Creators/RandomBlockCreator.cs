@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Engine.Geometry;
-using Assets.Scripts.Game.Blocks.Data;
+using Assets.Scripts.Serialization.Levels;
 
 namespace Assets.Scripts.Game.Blocks.Creators {
     class RandomBlockCreator : BlockCreator {
@@ -9,7 +9,7 @@ namespace Assets.Scripts.Game.Blocks.Creators {
 
         public RandomBlockCreator(int count, float blockWidth, float blockHeight, int maxRow, int maxCol) {
             var matrix = new RandomMatrix(maxRow, maxCol);
-            _info = matrix.Normalize().Get(count).Select(x => new BlockInfo(x.X, x.Y, blockWidth, blockHeight));
+            //_info = matrix.Normalize().Get(count).Select(x => new BlockInfo(x.X, x.Y, blockWidth, blockHeight));
         }
 
         public override IEnumerable<BlockInfo> BlocksInfo {

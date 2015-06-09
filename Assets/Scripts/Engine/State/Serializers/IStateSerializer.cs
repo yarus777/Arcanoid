@@ -1,7 +1,5 @@
 ﻿namespace Assets.Scripts.Engine.State.Serializers {
-    public interface IStateSerializer {
+    public interface IStateSerializer : IReadStateSerializer {
         void Serialize(string key, object obj);
-
-        T Deserialize<T>(string key);
     }
 }

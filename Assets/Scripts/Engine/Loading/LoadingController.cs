@@ -15,11 +15,13 @@
         #region Loaders
 
         public SceneLoader SceneLoader { get; private set; }
+        public LevelLoader LevelLoader { get; private set; }
 
         #endregion
 
         private LoadingController() {
             SceneLoader = new SceneLoader();
+            LevelLoader = new LevelLoader();
         }
     }
 }

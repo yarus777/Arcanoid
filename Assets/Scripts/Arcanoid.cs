@@ -58,7 +58,7 @@ namespace Assets.Scripts {
         }
 
         private void InitDefaults() {
-            DefaultParameters = DefaultParameters.Load(new XmlSerializer(new ResourceStateSaver()));
+            DefaultParameters = DefaultParameters.Load(new XmlReader(new ResourceStateLoader()));
         }
 
         private void InitLevelStorage() {

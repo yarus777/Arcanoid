@@ -6,7 +6,6 @@ namespace Assets.Scripts.Game.Parameters {
     [Serializable]
     class GameParameters {
         public Vector2 BallSpeed;
-        public GameConsts.FieldType FieldType;
         public int BlockCount;
         public int GridSizeX;
         public int GridSizeY;

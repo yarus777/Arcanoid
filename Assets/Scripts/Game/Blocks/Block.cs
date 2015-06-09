@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Engine.Striked;
-using Assets.Scripts.Game.Blocks.Data;
+using Assets.Scripts.Game.Consts;
+using Assets.Scripts.Serialization.Levels;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Blocks {
@@ -15,11 +16,11 @@ namespace Assets.Scripts.Game.Blocks {
 
         public void Init(BlockInfo blockInfo) {
             var rectTransform = transform as RectTransform;
-            rectTransform.anchoredPosition = new Vector2(blockInfo.XPos * blockInfo.Width, blockInfo.YPos * blockInfo.Height);
+            rectTransform.anchoredPosition = new Vector2(blockInfo.Position.x, blockInfo.Position.y);
             rectTransform.localScale = new Vector3(1, 1, 1);
-            rectTransform.sizeDelta = new Vector2(blockInfo.Width, blockInfo.Height);
-            Collider.size = new Vector2(blockInfo.Width, blockInfo.Height);
-            name = string.Format("{0}[{1}][{2}]", name, blockInfo.XPos, blockInfo.YPos);
+            rectTransform.sizeDelta = new Vector2(GameConsts.BLOCK_SIZE.x, GameConsts.BLOCK_SIZE.y);
+            Collider.size = new Vector2(GameConsts.BLOCK_SIZE.x, GameConsts.BLOCK_SIZE.y);
+            name = string.Format("{0}[{1}][{2}]", name, blockInfo.Position.x, blockInfo.Position.y);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {

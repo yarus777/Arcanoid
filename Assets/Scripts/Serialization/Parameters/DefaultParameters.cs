@@ -13,7 +13,7 @@ namespace Assets.Scripts.Serialization.Parameters {
             LivesCount = 5;
         }
 
-        public static DefaultParameters Load(IStateSerializer serializer) {
+        public static DefaultParameters Load(IReadStateSerializer serializer) {
             return serializer.Deserialize<DefaultParameters>(Strings.PARAMETERS_PATH);
         }
     }
