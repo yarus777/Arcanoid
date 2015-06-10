@@ -4,24 +4,63 @@
   <Blocks>
     <Block>
       <Type>Stone</Type>
-      <Position>
-        <x>120</x>
-        <y>0</y>
-      </Position>
+      <X>2</X>
+      <Y>0</Y>
+    </Block>
+    <Block>
+      <Type>Stone</Type>
+      <X>4</X>
+      <Y>0</Y>
+    </Block>
+    <Block>
+      <Type>Stone</Type>
+      <X>6</X>
+      <Y>0</Y>
+    </Block>
+    <Block>
+      <Type>Stone</Type>
+      <X>0</X>
+      <Y>0</Y>
     </Block>
     <Block>
       <Type>Wood</Type>
-      <Position>
-        <x>240</x>
-        <y>0</y>
-      </Position>
+      <X>1</X>
+      <Y>1</Y>
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <X>3</X>
+      <Y>1</Y>
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <X>5</X>
+      <Y>1</Y>
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <X>7</X>
+      <Y>1</Y>
     </Block>
     <Block>
       <Type>Metal</Type>
-      <Position>
-        <x>0</x>
-        <y>0</y>
-      </Position>
+      <X>2</X>
+      <Y>2</Y>
+    </Block>
+    <Block>
+      <Type>Metal</Type>
+      <X>4</X>
+      <Y>2</Y>
+    </Block>
+    <Block>
+      <Type>Metal</Type>
+      <X>6</X>
+      <Y>2</Y>
+    </Block>
+    <Block>
+      <Type>Metal</Type>
+      <X>0</X>
+      <Y>2</Y>
     </Block>
   </Blocks>
 </Level>

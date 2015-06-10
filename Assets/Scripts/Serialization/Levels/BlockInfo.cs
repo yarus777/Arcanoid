@@ -1,15 +1,30 @@
 ﻿using System.Xml.Serialization;
 
-using UnityEngine;
+using Assets.Scripts.Engine.Geometry;
 
 namespace Assets.Scripts.Serialization.Levels {
-    public class BlockInfo : SavedInfo {
-        public static readonly Vector2 SIZE = new Vector2(150, 70);
-
+    public class BlockInfo : SavedInfo, ITransponable {
         [XmlElement("Type")]
         public BlockType Type;
 
-        [XmlElement("Position")]
-        public Vector2 Position;
+        [XmlElement("X")]
+        public int X { get; set; }
+
+        [XmlElement("Y")]
+        public int Y { get; set; }
+
+        public BlockInfo() {
+        }
+
+        public BlockInfo(int x, int y, BlockType type) {
+            X = x;
+            Y = y;
+            Type = type;
+        }
+
+        public void Transpone(int byX, int byY) {
+            X += byX;
+            Y += byY;
+        }
     }
 }

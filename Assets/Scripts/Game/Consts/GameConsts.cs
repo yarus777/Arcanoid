@@ -18,5 +18,8 @@ namespace Assets.Scripts.Game.Consts {
         }
 
         public static readonly Vector2 BLOCK_SIZE = new Vector2(120, 70);
+
+        public const int FIELD_WIDTH = 8;
+        public const int FIELD_HEIGHT = 6;
     }
 }

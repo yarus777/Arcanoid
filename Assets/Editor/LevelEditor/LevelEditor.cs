@@ -60,7 +60,7 @@ namespace Assets.Editor.LevelEditor {
             _taskTab = new TaskTab();
             _blockTab = new BlockTab(_blockTextures);
             _tabs = new Tabs.Tabs(_blockTab, _taskTab);
-            _field = new FieldPanel(Consts.FIELD_WIDTH, Consts.FIELD_HEIGHT, GameConsts.BLOCK_SIZE, _blockTextures);
+            _field = new FieldPanel(Consts.FIELD_WIDTH, Consts.FIELD_HEIGHT, new Vector2(Consts.BLOCK_WIDTH, Consts.BLOCK_HEIGHT), _blockTextures);
 
             Level = new LevelInfo();
         }

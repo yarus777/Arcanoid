@@ -7,7 +7,10 @@ namespace Assets.Editor.LevelEditor {
         public const string FIELD_TEXTURE_PATH = "Assets/Textures/Editor/field.png";
         public const string LEVELS_PATH = Strings.LEVELS_PATH;
 
-        public const int FIELD_WIDTH = 480;
-        public const int FIELD_HEIGHT = 800;
+        public const int FIELD_WIDTH = 560;
+        public const int FIELD_HEIGHT = 750;
+
+        public const int BLOCK_WIDTH = 70;
+        public const int BLOCK_HEIGHT = 40;
     }
 }

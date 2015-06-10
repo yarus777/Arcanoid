@@ -19,11 +19,12 @@ namespace Assets.Scripts.Game.Blocks {
 
         public void Init(BlockInfo blockInfo) {
             var rectTransform = transform as RectTransform;
-            rectTransform.anchoredPosition = new Vector2(blockInfo.Position.x, blockInfo.Position.y);
+            rectTransform.anchoredPosition = new Vector2(blockInfo.X * GameConsts.BLOCK_SIZE.x, -blockInfo.Y * GameConsts.BLOCK_SIZE.y);
             rectTransform.localScale = new Vector3(1, 1, 1);
             rectTransform.sizeDelta = new Vector2(GameConsts.BLOCK_SIZE.x, GameConsts.BLOCK_SIZE.y);
-            Collider.size = new Vector2(GameConsts.BLOCK_SIZE.x, GameConsts.BLOCK_SIZE.y);
-            name = string.Format("{0}[{1}][{2}]", name, blockInfo.Position.x, blockInfo.Position.y);
+            Collider.size = GameConsts.BLOCK_SIZE;
+            Collider.center = new Vector2(GameConsts.BLOCK_SIZE.x / 2, -GameConsts.BLOCK_SIZE.y / 2);
+            name = string.Format("{0}[{1}][{2}]", name, blockInfo.X, blockInfo.Y);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {

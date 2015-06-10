@@ -6,12 +6,13 @@ using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Engine.Geometry {
     class RandomMatrix : Matrix {
-        public RandomMatrix(int x, int y)
+        public RandomMatrix(int x, int y, int count)
             : base(x, y) {
+            SetCells(Get(count));
         }
 
-        public override IEnumerable<CellCoords> Get(int count) {
-            var list = new List<CellCoords>();
+        private IEnumerable<ITransponable> Get(int count) {
+            var list = new List<ITransponable>();
             while (list.Count < count) {
                 var elem = GetRandom(list);
                 if (elem == null) {
@@ -22,10 +23,10 @@ namespace Assets.Scripts.Engine.Geometry {
             return list;
         }
 
-        private CellCoords GetRandom(IList<CellCoords> existing) {
+        private CellCoords GetRandom(IList<ITransponable> existing) {
             var index = Random.Range(0, Width * Height - existing.Count);
-            for (var i = _xBegin; i < _xBegin + Width; i++) {
-                for (var j = _yBegin; j < _yBegin + Height; j++) {
+            for (var i = 0; i < Width; i++) {
+                for (var j = 0; j < Height; j++) {
                     if (existing.Any(coord => coord.X == i && coord.Y == j)) {
                         continue;
                     }
