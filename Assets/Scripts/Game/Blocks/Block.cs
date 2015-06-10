@@ -1,11 +1,12 @@
 ﻿using Assets.Scripts.Engine.Striked;
 using Assets.Scripts.Game.Consts;
+using Assets.Scripts.Serialization;
 using Assets.Scripts.Serialization.Levels;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Blocks {
     [RequireComponent(typeof(BoxCollider2D))]
-    class Block : AbstractBlock {
+    abstract class Block : AbstractBlock {
         private BoxCollider2D _collider;
 
         private BoxCollider2D Collider {
@@ -13,6 +14,8 @@ namespace Assets.Scripts.Game.Blocks {
                 return _collider ?? (_collider = GetComponent<BoxCollider2D>());
             }
         }
+
+        public abstract BlockType Type { get; }
 
         public void Init(BlockInfo blockInfo) {
             var rectTransform = transform as RectTransform;

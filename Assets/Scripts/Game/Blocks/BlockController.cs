@@ -2,7 +2,7 @@
 using Assets.Scripts.Game.Blocks.Creators;
 using Assets.Scripts.Game.GameInterfaces;
 using System.Collections.Generic;
-
+using System.Linq;
 using Assets.Scripts.Engine.Extensions;
 using Assets.Scripts.Game.Levels;
 
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Game.Blocks {
 
         public void Init(BlockCreator creator) {
             foreach(var blockInfo in creator.BlocksInfo) {
-                var blockObj = Instantiate(BlocksPrefabs.Random().gameObject) as GameObject;
+                var blockObj = Instantiate(BlocksPrefabs.FirstOrDefault(x => x.Type == blockInfo.Type).gameObject) as GameObject;
                 blockObj.transform.SetParent(transform);
                 var block = blockObj.GetComponent<Block>();
                 block.Init(blockInfo);
