@@ -4,63 +4,78 @@
   <Blocks>
     <Block>
       <Type>Stone</Type>
-      <X>2</X>
-      <Y>0</Y>
-    </Block>
-    <Block>
-      <Type>Stone</Type>
-      <X>4</X>
-      <Y>0</Y>
-    </Block>
-    <Block>
-      <Type>Stone</Type>
-      <X>6</X>
-      <Y>0</Y>
-    </Block>
-    <Block>
-      <Type>Stone</Type>
-      <X>0</X>
-      <Y>0</Y>
+      <X>3</X>
+      <Y>3</Y>
     </Block>
     <Block>
       <Type>Wood</Type>
-      <X>1</X>
-      <Y>1</Y>
+      <X>4</X>
+      <Y>3</Y>
+    </Block>
+    <Block>
+      <Type>Metal</Type>
+      <X>2</X>
+      <Y>3</Y>
+    </Block>
+    <Block>
+      <Type>Stone</Type>
+      <X>2</X>
+      <Y>4</Y>
     </Block>
     <Block>
       <Type>Wood</Type>
       <X>3</X>
-      <Y>1</Y>
-    </Block>
-    <Block>
-      <Type>Wood</Type>
-      <X>5</X>
-      <Y>1</Y>
-    </Block>
-    <Block>
-      <Type>Wood</Type>
-      <X>7</X>
-      <Y>1</Y>
-    </Block>
-    <Block>
-      <Type>Metal</Type>
-      <X>2</X>
-      <Y>2</Y>
+      <Y>4</Y>
     </Block>
     <Block>
       <Type>Metal</Type>
       <X>4</X>
-      <Y>2</Y>
+      <Y>4</Y>
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <X>2</X>
+      <Y>5</Y>
     </Block>
     <Block>
       <Type>Metal</Type>
-      <X>6</X>
-      <Y>2</Y>
+      <X>1</X>
+      <Y>4</Y>
+    </Block>
+    <Block>
+      <Type>Stone</Type>
+      <X>1</X>
+      <Y>5</Y>
     </Block>
     <Block>
       <Type>Metal</Type>
-      <X>0</X>
-      <Y>2</Y>
+      <X>3</X>
+      <Y>5</Y>
+    </Block>
+    <Block>
+      <Type>Stone</Type>
+      <X>4</X>
+      <Y>5</Y>
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <X>1</X>
+      <Y>3</Y>
+    </Block>
+    <Block>
+      <Type>Metal</Type>
+      <X>5</X>
+      <Y>3</Y>
+    </Block>
+    <Block>
+      <Type>Stone</Type>
+      <X>5</X>
+      <Y>4</Y>
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <X>5</X>
+      <Y>5</Y>
     </Block>
   </Blocks>
 </Level>

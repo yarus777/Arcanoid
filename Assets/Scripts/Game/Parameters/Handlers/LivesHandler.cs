@@ -2,10 +2,32 @@
 using Assets.Scripts.Engine.State;
 using Assets.Scripts.Engine.State.Serializers;
 using Assets.Scripts.Game.Consts;
+using Assets.Scripts.Game.State;
 
 namespace Assets.Scripts.Game.Parameters.Handlers {
     class LivesHandler : IStatisticHandler {
         private const string KEY = "lives";
+
+        public LivesHandler() {
+            Arcanoid.Instance.StateController.StateChanged += OnGameStateChanged;
+        }
+
+        #region State handlers
+
+        private void OnGameStateChanged(GameState state) {
+            switch (state) {
+                case GameState.Lose:
+                    OnLose();
+                    break;
+            }
+        }
+
+        private void OnLose() {
+            Count--;
+            OnStateChanged();
+        }
+
+        #endregion
 
         public GameConsts.StatisticItems Type {
             get {

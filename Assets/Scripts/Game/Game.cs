@@ -1,17 +1,11 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.Engine;
+﻿using Assets.Scripts.Engine;
 using Assets.Scripts.Game.Balls;
 using Assets.Scripts.Game.Blocks;
-using Assets.Scripts.Game.Blocks.Creators;
 using Assets.Scripts.Game.Bounds;
-using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.GameInterfaces;
-using Assets.Scripts.Game.Levels;
 using Assets.Scripts.Game.Parameters;
 using Assets.Scripts.Game.State;
-using Assets.Scripts.Game.State.FailReasons;
 using Assets.Scripts.UI.GameScene;
-using Assets.Scripts.UI.Popups.Implementations;
 
 using UnityEngine;
 
@@ -102,7 +96,7 @@ namespace Assets.Scripts.Game {
 
         private void InitBlocks() {
             var currentLevel = Arcanoid.Instance.LevelStorage.CurrentLevel;
-            BlockController.Init(currentLevel.BlockCreator);
+            BlockController.Init(currentLevel.Blocks);
             _storage.Add(BlockController);
         }
 

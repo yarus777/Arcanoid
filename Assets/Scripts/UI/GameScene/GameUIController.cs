@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.UI.Popups;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.UI.GameScene {
     class GameUIController : MonoBehaviour {
@@ -10,15 +8,6 @@ namespace Assets.Scripts.UI.GameScene {
         public InfoController Info {
             get {
                 return InfoController;
-            }
-        }
-
-        [SerializeField]
-        private PopupController PopupController;
-
-        public PopupController Popups {
-            get {
-                return PopupController;
             }
         }
     }

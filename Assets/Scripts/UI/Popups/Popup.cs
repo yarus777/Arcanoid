@@ -20,11 +20,11 @@ namespace Assets.Scripts.UI.Popups {
         }
 
         protected virtual void OnClose() {
-            Game.Game.Instance.UI.Popups.RemoveTop();
+            PopupController.Instance.RemoveTop();
         }
 
         public void Close() {
-            Game.Game.Instance.UI.Popups.Close();
+            PopupController.Instance.Close();
         }
 
         public void OnClick() {

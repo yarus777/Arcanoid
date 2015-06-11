@@ -5,6 +5,7 @@ using Assets.Scripts.Engine.Striked;
 using Assets.Scripts.Game.Blocks.Creators;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Levels;
+using Assets.Scripts.Serialization.Levels;
 
 using UnityEngine;
 
@@ -15,9 +16,13 @@ namespace Assets.Scripts.Game.Blocks {
 
         private readonly List<AbstractBlock> _blocks = new List<AbstractBlock>();
 
-        public void Init(BlockCreator creator) {
-            foreach(var blockInfo in creator.BlocksInfo) {
-                var blockObj = Instantiate(BlocksPrefabs.FirstOrDefault(x => x.Type == blockInfo.Type).gameObject) as GameObject;
+        public void Init(IEnumerable<BlockInfo> blocks) {
+            foreach(var blockInfo in blocks) {
+                var prefab = BlocksPrefabs.FirstOrDefault(x => x.Type == blockInfo.Type);
+                if (prefab == null) {
+                    continue;
+                }
+                var blockObj = Instantiate(prefab.gameObject) as GameObject;
                 blockObj.transform.SetParent(transform);
                 var block = blockObj.GetComponent<Block>();
                 block.Init(blockInfo);

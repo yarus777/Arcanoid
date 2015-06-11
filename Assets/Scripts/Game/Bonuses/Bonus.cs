@@ -1,8 +1,4 @@
-﻿
-
-namespace Assets.Scripts.Game.Bonuses
-{
-    abstract class Bonus
-    {
+﻿namespace Assets.Scripts.Game.Bonuses {
+    abstract class Bonus {
     }
 }

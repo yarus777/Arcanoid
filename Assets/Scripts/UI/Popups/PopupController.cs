@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using Assets.Scripts.Engine;
 using Assets.Scripts.Game.State;
 using Assets.Scripts.UI.Popups.Animations;
 using Assets.Scripts.UI.Popups.Implementations;
@@ -8,7 +9,7 @@ using Assets.Scripts.UI.Popups.Implementations;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Popups {
-    class PopupController : MonoBehaviour {
+    class PopupController : UnitySingleton<PopupController> {
         [SerializeField]
         private Popup[] PopupsPrefabs;
 
@@ -16,11 +17,11 @@ namespace Assets.Scripts.UI.Popups {
         private IPopupAnimation _animator = new ScalingPopupAnimation();
 
         private void Start() {
-            Game.Game.Instance.State.StateChanged += OnStateChanged;
+            Arcanoid.Instance.StateController.StateChanged += OnStateChanged;
         }
 
         private void OnDestroy() {
-            Game.Game.Instance.State.StateChanged -= OnStateChanged;
+            Arcanoid.Instance.StateController.StateChanged -= OnStateChanged;
         }
 
         #region Event handlers
