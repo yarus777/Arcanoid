@@ -29,7 +29,7 @@ public class LevelPreview : MonoBehaviour {
     public void OnClick() {
         if (Arcanoid.Instance.Statistics.Get(GameConsts.StatisticItems.Lives).Count > 0) {
             Arcanoid.Instance.LevelStorage.SetCurrentLevel(Number);
-            LoadingController.Instance.SceneLoader.ToNextScene();
+            LoadingController.Instance.SceneLoader.ToScene("GameScene");
         }
         else {
             PopupController.Instance.ShowPopup<LivesEndPopup>();

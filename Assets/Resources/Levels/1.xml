@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Number>1</Number>
+  <Blocks>
+    <Block>
+      <Type>Stone</Type>
+      <X>4</X>
+      <Y>0</Y>
+      <Bonuses />
+    </Block>
+    <Block>
+      <Type>Wood</Type>
+      <X>7</X>
+      <Y>0</Y>
+      <Bonuses />
+    </Block>
+    <Block>
+      <Type>Metal</Type>
+      <X>0</X>
+      <Y>0</Y>
+      <Bonuses />
+    </Block>
+  </Blocks>
+</Level>

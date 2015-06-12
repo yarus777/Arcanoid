@@ -87,11 +87,15 @@ namespace Assets.Scripts.Game.State {
         }
 
         public void DeInit() {
-            foreach (var reason in _failReasons) {
-                reason.Failed -= OnFail;
+            if (_failReasons != null) {
+                foreach (var reason in _failReasons) {
+                    reason.Failed -= OnFail;
+                }
             }
-            foreach (var reason in _winReasons) {
-                reason.Win -= OnWin;
+            if (_winReasons != null) {
+                foreach (var reason in _winReasons) {
+                    reason.Win -= OnWin;
+                }
             }
         }
 

@@ -35,6 +35,7 @@ namespace Assets.Scripts.Game.Levels {
         }
 
         public virtual void Init(LevelInfo level) {
+            Number = level.Number;
             var matrix = new Matrix(GameConsts.FIELD_WIDTH, GameConsts.FIELD_HEIGHT);
             matrix.SetCells(level.Blocks.Cast<ITransponable>());
             Blocks = matrix.Normalize().Cast<BlockInfo>();

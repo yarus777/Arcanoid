@@ -17,7 +17,22 @@ namespace Assets.Scripts.Game.Blocks {
         private readonly List<AbstractBlock> _blocks = new List<AbstractBlock>();
 
         public void Init(IEnumerable<BlockInfo> blocks) {
-            foreach(var blockInfo in blocks) {
+            //foreach(var blockInfo in blocks) {
+            //    var prefab = BlocksPrefabs.FirstOrDefault(x => x.Type == blockInfo.Type);
+            //    if (prefab == null) {
+            //        continue;
+            //    }
+            //    var blockObj = Instantiate(prefab.gameObject) as GameObject;
+            //    blockObj.transform.SetParent(transform);
+            //    var block = blockObj.GetComponent<Block>();
+            //    block.Init(blockInfo);
+            //    block.Striked += OnBlockStriked;
+            //    _blocks.Add(block);
+            //}
+        }
+        
+        public void StartGame(Level level) {
+            foreach (var blockInfo in level.Blocks) {
                 var prefab = BlocksPrefabs.FirstOrDefault(x => x.Type == blockInfo.Type);
                 if (prefab == null) {
                     continue;
@@ -29,10 +44,6 @@ namespace Assets.Scripts.Game.Blocks {
                 block.Striked += OnBlockStriked;
                 _blocks.Add(block);
             }
-        }
-        
-        public void StartGame(Level level) {
-            
         }
 
         public void FinishGame() {

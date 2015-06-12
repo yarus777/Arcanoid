@@ -4,6 +4,7 @@ using Assets.Scripts.Game.Blocks;
 using Assets.Scripts.Game.Bounds;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Parameters;
+using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.State;
 using Assets.Scripts.UI.GameScene;
 
@@ -36,6 +37,9 @@ namespace Assets.Scripts.Game {
 
         [SerializeField]
         private BallController BallController;
+
+        [SerializeField]
+        private PlayerController PlayerController;
 
         [SerializeField]
         private Ground BottomBorder;
@@ -91,19 +95,17 @@ namespace Assets.Scripts.Game {
         }
 
         private void InitBalls() {
-            BallController.Init(Parameters.BallSpeed);
+            BallController.Init(Parameters.BallSpeed, PlayerController.Platform);
             _storage.Add(BallController);
         }
 
         private void InitBlocks() {
-            var currentLevel = Arcanoid.Instance.LevelStorage.CurrentLevel;
-            BlockController.Init(currentLevel.Blocks);
+            //var currentLevel = Arcanoid.Instance.LevelStorage.CurrentLevel;
+            //BlockController.Init(currentLevel.Blocks);
             _storage.Add(BlockController);
         }
 
         private void InitBonuses() {
-            var controller = new BlockController();
-            _storage.Add(controller);
         }
 
         private void InitStateController() {
@@ -125,8 +127,9 @@ namespace Assets.Scripts.Game {
         }
 
         private void StartGame() {
+            var currentLevel = Arcanoid.Instance.LevelStorage.CurrentLevel;
             foreach (var component in _storage.Get<IGameComponent>()) {
-                component.StartGame(Arcanoid.Instance.LevelStorage.CurrentLevel);
+                component.StartGame(currentLevel);
             }
         }
 

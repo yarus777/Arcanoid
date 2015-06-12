@@ -46,6 +46,7 @@ namespace Assets.Editor.LevelEditor {
         private FieldPanel _field;
         private BlockTab _blockTab;
         private TaskTab _taskTab;
+        private ParametersTab _parmsTab;
 
         #endregion
 
@@ -59,7 +60,10 @@ namespace Assets.Editor.LevelEditor {
 
             _taskTab = new TaskTab();
             _blockTab = new BlockTab(_blockTextures);
-            _tabs = new Tabs.Tabs(_blockTab, _taskTab);
+            _parmsTab = new ParametersTab();
+
+            _tabs = new Tabs.Tabs(_parmsTab, _blockTab, _taskTab);
+            
             _field = new FieldPanel(Consts.FIELD_WIDTH, Consts.FIELD_HEIGHT, new Vector2(Consts.BLOCK_WIDTH, Consts.BLOCK_HEIGHT), _blockTextures);
 
             Level = new LevelInfo();
@@ -95,6 +99,7 @@ namespace Assets.Editor.LevelEditor {
         private void OnLevelLoaded() {
             _field.Init(Level.Blocks);
             _blockTab.Init(Level.Blocks);
+            _parmsTab.Init(Level);
         }
     }
 }
