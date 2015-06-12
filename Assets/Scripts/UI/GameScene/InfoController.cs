@@ -21,8 +21,8 @@ namespace Assets.Scripts.UI.GameScene {
         }
 
         private void Update() {
-            Lives.text = "" + _lives.Count;
-            Score.text = "" + _score.Count;
+            Lives.text = "Lives: " + _lives.Count;
+            Score.text = "Score: " + _score.Count;
         }
     }
 }

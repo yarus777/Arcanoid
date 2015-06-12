@@ -14,10 +14,11 @@ namespace Assets.Scripts.UI.MapScene {
         private void Start() {
             int row = 0;
             int col = 0;
+            var offset = LevelInRow * LevelPreview.WIDTH / 2;
             for (var i = 0; i <= MaxLevelNumber; i++) {
                 var obj = Instantiate(LevelPrefab.gameObject) as GameObject;
                 obj.transform.parent = transform;
-                obj.transform.localPosition = new Vector2(col * LevelPreview.WIDTH, row * LevelPreview.HEIGHT);
+                obj.transform.localPosition = new Vector2(col * LevelPreview.WIDTH - offset, -row * LevelPreview.HEIGHT);
                 obj.transform.localScale = Vector3.one;
                 col++;
                 if (col >= LevelInRow) {
