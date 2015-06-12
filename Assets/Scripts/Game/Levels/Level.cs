@@ -34,9 +34,9 @@ namespace Assets.Scripts.Game.Levels {
             _winReasons.Add(new FieldClearedReason());
         }
 
-        public virtual void Init(IEnumerable<BlockInfo> blocks) {
+        public virtual void Init(LevelInfo level) {
             var matrix = new Matrix(GameConsts.FIELD_WIDTH, GameConsts.FIELD_HEIGHT);
-            matrix.SetCells(blocks.Cast<ITransponable>());
+            matrix.SetCells(level.Blocks.Cast<ITransponable>());
             Blocks = matrix.Normalize().Cast<BlockInfo>();
         }
 

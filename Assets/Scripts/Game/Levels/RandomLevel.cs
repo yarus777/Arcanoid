@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Assets.Scripts.Game.Blocks.Creators;
+﻿using Assets.Scripts.Game.Blocks.Creators;
 using Assets.Scripts.Serialization.Levels;
 
 namespace Assets.Scripts.Game.Levels {
@@ -11,7 +9,7 @@ namespace Assets.Scripts.Game.Levels {
             _hardness = hardness;
         }
 
-        public override void Init(IEnumerable<BlockInfo> blocks) {
+        public override void Init(LevelInfo level) {
             Blocks =  new RandomBlockCreator(10, 5, 4).BlocksInfo;
         }
     }

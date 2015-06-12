@@ -1,43 +1,39 @@
-﻿using UnityEngine;
-using System.Collections;
-using Assets.Scripts;
+﻿using Assets.Scripts;
 using Assets.Scripts.Engine.Loading;
-using Assets.Scripts.Game.Levels;
+using Assets.Scripts.Game.Consts;
+using Assets.Scripts.UI.Popups;
+using Assets.Scripts.UI.Popups.Implementations;
+
+using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelPreview : MonoBehaviour
-{
+public class LevelPreview : MonoBehaviour {
+    public const float WIDTH = 200;
+    public const float HEIGHT = 200;
 
-    public Text LevelNumber;
+    [SerializeField]
+    private Text LevelNumber;
+
     private int _levelNumber;
-
-    public int Number
-    {
-        get
-        {
+    public int Number {
+        get {
             return _levelNumber;
         }
-        set
-        {
+        set {
             _levelNumber = value;
-            LevelNumber.text = value.ToString();
+            LevelNumber.text = "" + value;
+            gameObject.name = "Level_" + value;
         }
     }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public void OnClick()
-    {
-        Arcanoid.Instance.LevelStorage.SetCurrentLevel(Number); 
-        LoadingController.Instance.SceneLoader.ToNextScene();
+    public void OnClick() {
+        if (Arcanoid.Instance.Statistics.Get(GameConsts.StatisticItems.Lives).Count > 0) {
+            Arcanoid.Instance.LevelStorage.SetCurrentLevel(Number);
+            LoadingController.Instance.SceneLoader.ToNextScene();
+        }
+        else {
+            PopupController.Instance.ShowPopup<LivesEndPopup>();
+        }
         
     }
 }

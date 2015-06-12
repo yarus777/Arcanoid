@@ -1,10 +1,11 @@
 ﻿using Assets.Scripts.Engine.Striked;
+using Assets.Scripts.Game.Bonuses.Collectors;
 
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Bounds {
     [RequireComponent(typeof(Collider2D))]
-    class Ground : MonoBehaviour {
+    class Ground : MonoBehaviour, IBonusCollector {
         #region Events
 
         public delegate void GroundCrossedDelegate(IStriker ball);
@@ -23,6 +24,12 @@ namespace Assets.Scripts.Game.Bounds {
             var comp = coll.GetComponent(typeof(IStriker)); 
             if (comp != null) {
                 OnFail((IStriker)comp);
+            }
+        }
+
+        public bool IsCollectable {
+            get {
+                return false;
             }
         }
     }

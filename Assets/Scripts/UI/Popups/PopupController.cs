@@ -16,12 +16,15 @@ namespace Assets.Scripts.UI.Popups {
         private readonly Stack<Popup> _popups = new Stack<Popup>();
         private IPopupAnimation _animator = new ScalingPopupAnimation();
 
+        private Arcanoid _arcanoid;
+
         private void Start() {
-            Arcanoid.Instance.StateController.StateChanged += OnStateChanged;
+            _arcanoid = Arcanoid.Instance;
+            _arcanoid.StateController.StateChanged += OnStateChanged;
         }
 
         private void OnDestroy() {
-            Arcanoid.Instance.StateController.StateChanged -= OnStateChanged;
+            _arcanoid.StateController.StateChanged -= OnStateChanged;
         }
 
         #region Event handlers

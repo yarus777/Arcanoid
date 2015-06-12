@@ -13,7 +13,12 @@ namespace Assets.Scripts.Serialization.Levels {
         [XmlElement("Y")]
         public int Y { get; set; }
 
+        [XmlArray("Bonuses")]
+        [XmlArrayItem("Bonus")]
+        public BonusInfo[] Bonuses { get; set; }
+
         public BlockInfo() {
+            Bonuses = new BonusInfo[0];
         }
 
         public BlockInfo(int x, int y, BlockType type) {

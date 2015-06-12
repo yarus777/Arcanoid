@@ -16,25 +16,22 @@ namespace Assets.Scripts.Game.Levels {
 
         public LevelStorage() {
             _levels = LoadingController.Instance.LevelLoader.Load();
-
-            //_levels = new List<Level>();    
-            //_levels.Add(new Level());
         }
 
         public Level this[int number] {
             get {
                 var lvl = _levels.FirstOrDefault(level => level.Number == number);
                 if (lvl == null) {
-                    return new RandomLevel(new Hardness.Hardness());
+                    var randomLevel = new RandomLevel(new Hardness.Hardness());
+                    randomLevel.Init(null);
+                    return randomLevel;
                 }
                 return lvl;
             }
         }
 
-        public int SetCurrentLevel(int levelNumber)
-        {
-           return _currentLevel = levelNumber;
-            
+        public void SetCurrentLevel(int levelNumber) {
+            _currentLevel = levelNumber;
         }
     }
 }

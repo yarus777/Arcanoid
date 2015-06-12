@@ -83,6 +83,7 @@ namespace Assets.Scripts.Game {
         private void Init() {
             InitBalls();
             InitBlocks();
+            InitBonuses();
 
             InitComponents();
             InitStateController();
@@ -98,6 +99,11 @@ namespace Assets.Scripts.Game {
             var currentLevel = Arcanoid.Instance.LevelStorage.CurrentLevel;
             BlockController.Init(currentLevel.Blocks);
             _storage.Add(BlockController);
+        }
+
+        private void InitBonuses() {
+            var controller = new BlockController();
+            _storage.Add(controller);
         }
 
         private void InitStateController() {
@@ -120,7 +126,7 @@ namespace Assets.Scripts.Game {
 
         private void StartGame() {
             foreach (var component in _storage.Get<IGameComponent>()) {
-                component.StartGame(Arcanoid.Instance.LevelStorage[0]);
+                component.StartGame(Arcanoid.Instance.LevelStorage.CurrentLevel);
             }
         }
 

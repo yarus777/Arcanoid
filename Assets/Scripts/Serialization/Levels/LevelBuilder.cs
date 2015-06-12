@@ -4,7 +4,7 @@ namespace Assets.Scripts.Serialization.Levels {
     class LevelBuilder {
         public static Level Restore(LevelInfo level) {
             var lvl = new Level();
-            lvl.Init(level.Blocks);
+            lvl.Init(level);
             return lvl;
         }
     }
