@@ -30,5 +30,11 @@ namespace Assets.Scripts.Game.Levels {
                 return lvl;
             }
         }
+
+        public int SetCurrentLevel(int levelNumber)
+        {
+           return _currentLevel = levelNumber;
+            
+        }
     }
 }
