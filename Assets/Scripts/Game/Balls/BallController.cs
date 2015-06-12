@@ -20,8 +20,9 @@ namespace Assets.Scripts.Game.Balls {
         #region IGameComponent
 
         public void StartGame(Level level) {
-            CreateBall(true);
-            //Ball.Send(_ballSpeed);
+            var ball = CreateBall();
+            SetToPlayer(ball);
+            SendBall(ball);
         }
 
         public void FinishGame() {
@@ -29,21 +30,24 @@ namespace Assets.Scripts.Game.Balls {
 
         #endregion
 
-        public void CreateBall(bool startImmediately) {
+        public Ball CreateBall() {
             var obj = Instantiate(BallPrefab.gameObject) as GameObject;
             var tr = obj.GetComponent<RectTransform>();
             tr.parent = transform;
-            //RectTransformUtility.
-            //tr.anchoredPosition = _player.GetComponent<RectTransform>().anchoredPosition;
             tr.localScale = new Vector3(1, 1, 1);
-
             var ball = obj.GetComponent<Ball>();
             _balls.Add(ball);
-            Debug.Log(transform.position);
-            Debug.Log(_player.transform.position);
-            if (startImmediately) {
-                ball.Send(_ballSpeed + new Vector2(Random.Range(-50, 50), Random.Range(-50, 50)));
-            }
+            return ball;
+        }
+
+        private void SendBall(Ball ball) {
+            ball.Send(_ballSpeed + new Vector2(Random.Range(-50, 50), Random.Range(-50, 50)));
+        }
+
+        private void SetToPlayer(Ball ball) {
+            var tr = ball.GetComponent<RectTransform>();
+            var plTr = _player.GetComponent<RectTransform>();
+            tr.anchoredPosition = plTr.anchoredPosition + new Vector2(0, tr.sizeDelta.y / 2);
         }
     }
 }
