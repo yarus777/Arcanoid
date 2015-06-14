@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Engine.Striked;
+using Assets.Scripts.Game.Bonuses.Implementations;
 using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Serialization;
 using Assets.Scripts.Serialization.Levels;
@@ -17,6 +18,9 @@ namespace Assets.Scripts.Game.Blocks {
 
         public abstract BlockType Type { get; }
 
+        [SerializeField]
+        private GameObject _bonus;
+
         public void Init(BlockInfo blockInfo) {
             var rectTransform = transform as RectTransform;
             rectTransform.anchoredPosition = new Vector2(blockInfo.X * GameConsts.BLOCK_SIZE.x, -blockInfo.Y * GameConsts.BLOCK_SIZE.y);
@@ -32,7 +36,16 @@ namespace Assets.Scripts.Game.Blocks {
             if (striker == null) {
                 return;
             }
+            SendBonus();
             OnStriked(striker);
+        }
+
+        private void SendBonus() {
+            if (_bonus == null) {
+                return;
+            }
+            _bonus.SetActive(true);
+            _bonus.rigidbody2D.AddForce(new Vector2(0, -1500));
         }
 
         #region Events
@@ -47,7 +60,5 @@ namespace Assets.Scripts.Game.Blocks {
         }
 
         #endregion
-
-        
     }
 }

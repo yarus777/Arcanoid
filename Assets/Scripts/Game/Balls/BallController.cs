@@ -12,7 +12,9 @@ namespace Assets.Scripts.Game.Balls {
         private Player.Player _player;
         private Vector2 _ballSpeed;
 
-        public void Init(Vector2 ballSpeed, Player.Player player) {
+        public int BallsLeft { get; private set; }
+
+        public void Init(int defaultBallsCount, Vector2 ballSpeed, Player.Player player) {
             _ballSpeed = ballSpeed;
             _player = player;
         }

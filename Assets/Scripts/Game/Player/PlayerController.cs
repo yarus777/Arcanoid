@@ -10,5 +10,9 @@ namespace Assets.Scripts.Game.Player {
                 return Player;
             }
         }
+
+        public void IncreaseSize() {
+            Player.Increase();
+        }
     }
 }

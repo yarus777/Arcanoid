@@ -1,17 +1,25 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-
+using Assets.Scripts.Game.Bonuses.Implementations;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Levels;
+using UnityEngine;
 
 namespace Assets.Scripts.Game.Bonuses {
-    class BonusController : IGameComponent {
+    class BonusController : MonoBehaviour, IGameComponent {
+        [SerializeField]
+        private CollectableBonus BonusPrefab;
+
         private List<IBonus> _bonuses;
 
         #region IGameComponent
 
         public void StartGame(Level level) {
-            //_bonuses = level.Blocks.SelectMany(block => block.Bonuses);
+            foreach (var blockInfo in level.Blocks) {
+                var bonusObj = Instantiate(BonusPrefab.gameObject) as GameObject;
+                bonusObj.transform.SetParent(transform);
+                bonusObj.transform.localScale = Vector3.one;
+                bonusObj.SetActive(false);
+            }
         }
 
         public void FinishGame() {

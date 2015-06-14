@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Engine;
 using Assets.Scripts.Game.Balls;
 using Assets.Scripts.Game.Blocks;
+using Assets.Scripts.Game.Bonuses;
 using Assets.Scripts.Game.Bounds;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Parameters;
@@ -34,6 +35,9 @@ namespace Assets.Scripts.Game {
 
         [SerializeField]
         private BlockController BlockController;
+
+        [SerializeField]
+        private BonusController BonusController;
 
         [SerializeField]
         private BallController BallController;
@@ -80,6 +84,10 @@ namespace Assets.Scripts.Game {
             }
         }
 
+        public PlayerController Player {
+            get { return _storage.GetFirst<PlayerController>(); }
+        }
+
         #endregion
 
         #region Initializing
@@ -88,6 +96,7 @@ namespace Assets.Scripts.Game {
             InitBalls();
             InitBlocks();
             InitBonuses();
+            InitPlayer();
 
             InitComponents();
             InitStateController();
@@ -95,7 +104,7 @@ namespace Assets.Scripts.Game {
         }
 
         private void InitBalls() {
-            BallController.Init(Parameters.BallSpeed, PlayerController.Platform);
+            BallController.Init(Arcanoid.Instance.DefaultParameters.LivesCount, Parameters.BallSpeed, PlayerController.Platform);
             _storage.Add(BallController);
         }
 
@@ -106,6 +115,11 @@ namespace Assets.Scripts.Game {
         }
 
         private void InitBonuses() {
+            _storage.Add(BonusController);
+        }
+
+        private void InitPlayer() {
+            _storage.Add(PlayerController);
         }
 
         private void InitStateController() {
