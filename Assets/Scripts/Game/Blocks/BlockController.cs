@@ -2,10 +2,9 @@
 using System.Linq;
 
 using Assets.Scripts.Engine.Striked;
-using Assets.Scripts.Game.Blocks.Creators;
+using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Game.GameInterfaces;
 using Assets.Scripts.Game.Levels;
-using Assets.Scripts.Serialization.Levels;
 
 using UnityEngine;
 
@@ -53,6 +52,10 @@ namespace Assets.Scripts.Game.Blocks {
         }
 
         #endregion
+
+        public static Vector2 BlockPositionFromSavedPosition(Vector2 savedPos) {
+            return new Vector2(savedPos.x * GameConsts.BLOCK_SIZE.x, -savedPos.y * GameConsts.BLOCK_SIZE.y);
+        }
 
     }
 }

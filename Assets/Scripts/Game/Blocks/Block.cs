@@ -3,6 +3,7 @@ using Assets.Scripts.Game.Bonuses.Implementations;
 using Assets.Scripts.Game.Consts;
 using Assets.Scripts.Serialization;
 using Assets.Scripts.Serialization.Levels;
+
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Blocks {
@@ -19,11 +20,11 @@ namespace Assets.Scripts.Game.Blocks {
         public abstract BlockType Type { get; }
 
         [SerializeField]
-        private GameObject _bonus;
+        private CollectableBonus _bonus;
 
         public void Init(BlockInfo blockInfo) {
             var rectTransform = transform as RectTransform;
-            rectTransform.anchoredPosition = new Vector2(blockInfo.X * GameConsts.BLOCK_SIZE.x, -blockInfo.Y * GameConsts.BLOCK_SIZE.y);
+            rectTransform.anchoredPosition = BlockController.BlockPositionFromSavedPosition(new Vector2(blockInfo.X, blockInfo.Y));
             rectTransform.localScale = new Vector3(1, 1, 1);
             rectTransform.sizeDelta = new Vector2(GameConsts.BLOCK_SIZE.x, GameConsts.BLOCK_SIZE.y);
             Collider.size = GameConsts.BLOCK_SIZE;
@@ -44,8 +45,8 @@ namespace Assets.Scripts.Game.Blocks {
             if (_bonus == null) {
                 return;
             }
-            _bonus.SetActive(true);
-            _bonus.rigidbody2D.AddForce(new Vector2(0, -1500));
+            _bonus.gameObject.SetActive(true);
+            _bonus.Send();
         }
 
         #region Events

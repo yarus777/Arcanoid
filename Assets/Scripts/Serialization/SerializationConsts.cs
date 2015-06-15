@@ -4,4 +4,8 @@
         Wood,
         Metal
     }
+
+    public enum BonusType {
+        IncreasePlatform
+    }
 }

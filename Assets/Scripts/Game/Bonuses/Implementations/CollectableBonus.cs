@@ -1,15 +1,19 @@
 ﻿using Assets.Scripts.Game.Bonuses.Collectors;
+using Assets.Scripts.Serialization;
 
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Bonuses.Implementations {
     [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
     abstract class CollectableBonus : MonoBehaviour, IBonus {
         public abstract void Apply();
 
         public virtual void Lose() {
             Remove();
         }
+
+        public abstract BonusType Type { get; }
 
         protected virtual void Remove() {
             Destroy(gameObject);
@@ -27,6 +31,10 @@ namespace Assets.Scripts.Game.Bonuses.Implementations {
             else {
                 Lose();
             }
+        }
+
+        public void Send() {
+            rigidbody2D.AddForce(new Vector2(0, -1500));
         }
     }
 }

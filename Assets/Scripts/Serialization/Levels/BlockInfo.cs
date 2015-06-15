@@ -13,18 +13,16 @@ namespace Assets.Scripts.Serialization.Levels {
         [XmlElement("Y")]
         public int Y { get; set; }
 
-        [XmlArray("Bonuses")]
-        [XmlArrayItem("Bonus")]
-        public BonusInfo[] Bonuses { get; set; }
-
-        public BlockInfo() {
-            Bonuses = new BonusInfo[0];
-        }
-
-        public BlockInfo(int x, int y, BlockType type) {
+        [XmlElement("Bonus")]
+        public BonusType? Bonus { get; set; }
+        public BlockInfo(int x, int y, BlockType type, BonusType? bonus = null) {
             X = x;
             Y = y;
             Type = type;
+            Bonus = bonus;
+        }
+
+        public BlockInfo() {
         }
 
         public void Transpone(int byX, int byY) {
